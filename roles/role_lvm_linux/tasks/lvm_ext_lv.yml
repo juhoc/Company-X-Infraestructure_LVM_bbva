@@ -20,7 +20,7 @@
       lvol:
         vg: "{{ vgnombre }}"
         lv: "{{ lvnombre }}"
-        size: "{{ lvcapacidad }}"
+        size: "{{ lvcapacidad }}g"
         resizefs: true
         shrink: false
       when: "lvcapacidad | int > s_flvftsz | int"
