@@ -11,7 +11,7 @@ fstipo: "{{ fst }}"
 #---varriables-comandos-sistema_operativo---
 vgchecknm: "if vgs | grep -wq {{ vgnombre }}; then echo {{ vgnombre }}; else echo NON_FOUND_VGAPPS; fi"
 vgchecksz: "vgs --units g | grep -w {{ vgnombre }} | tr -s ' <' , | cut -d, -f8 | cut -d. -f1"
-lvchecknm: 'if df | grep -qw {{ vgnombre }} && df | grep -qw {{ mpnombre }}; then echo "ITEMS_OK"; else echo "ITEMS_KO"; fi'
+lvchecknm: 'if df | grep -qw {{ vgnombre }}-{{ lvnombre }} && df | grep -qw {{ mpnombre }}; then echo "ITEMS_OK"; else echo "ITEMS_KO"; fi'
 lvchecksz: "df -h | tr -s ' %-' , | cut -d, -f2,3,6,7 | grep -w {{ lvnombre }},[0-9]...,[0-9],{{ mpnombre }} | cut -d, -f2 | tr -d 'gG' | cut -d. -f1"
 lvcheckpj: "df -h | tr -s ' %-' , | cut -d, -f2,3,6,7 | grep -w {{ lvnombre }},[0-9]...,[0-9],{{ mpnombre }} | cut -d, -f3"
 scandevices: 'for host in /sys/class/scsi_host/host*; do echo "- - -" | tee $host/scan; done'
