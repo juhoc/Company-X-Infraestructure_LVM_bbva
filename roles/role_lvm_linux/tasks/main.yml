@@ -21,6 +21,8 @@
       ['lvm_create_vg']
       {% elif tarea == 'Crear_LVNAME' %}
       ['lvm_create_lv']
+      {% elif tarea == 'Extender_LVNAME' %}
+      ['lvm_ext_lv']
       {% else %}
       ['No_selecciono_ninguna_tarea']
       {% endif %}
