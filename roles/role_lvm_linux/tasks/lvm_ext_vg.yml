@@ -75,6 +75,11 @@
 #   delegate_to: lvpinsatchsmx01.bvm.bluecare.kyndryl.net
 #------------------Validar Disco para VGAPPS------------------#
 - block:
+    - name: Pausa para anexar nuevo discos
+      pause:
+        minutes: 1
+        prompt: "Esperar a que se anexe el nuevo disco"
+
     - name: Ejecutar scaneo de nuevos dispositivo tipo disco
       become: true
       shell: "echo {{ scandevices }}"
