@@ -17,7 +17,7 @@ lvcheckpj: "df -h | tr -s ' %-' , | cut -d, -f2,3,6,7 | grep -w {{ lvnombre }},[
 scandevices: 'for host in /sys/class/scsi_host/host*; do echo "- - -" | tee $host/scan; done'
 chknwdsk: "lsblk -rn -o NAME,TYPE,SIZE,FSTYPE,MOUNTPOINT | sort | grep disk | tr -s ' ' , | cut -d, -f1,2,3"
 diffdisk: "sdiff {{ snapdisks }}/snapdisk_post {{ snapdisks }}/snapdisk_prev | grep '<'"
-vgexteded: 'pvs | grep {{ vgnombre }} | cut -d " " -f3 | paste -sd " " | sed "s/ /, /g"'
+pvvgdsks: 'pvs | grep {{ vgnombre }} | cut -d " " -f3'
 #---variables-objetos-sistema_operativo---
 varoptasbd: /var/opt/ansible/
 varoptasbf: /var/opt/ansible

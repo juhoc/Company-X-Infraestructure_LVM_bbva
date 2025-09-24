@@ -92,21 +92,29 @@
       register: dskinfo1
 
     - set_fact:
-        s_fsddisk: "{{ dskinfo1.stdout.split(',')[0] | default('NON_DISK_DETECT') }}"
+        s_fsddisk: "/dev/{{ dskinfo1.stdout.split(',')[0] | default('NON_DISK_DETECT') }}"
 
     - name: Resultado de la validar antes de crear el LV {{ lvnombre }}
       assert:
         that:
           - "'NON_DISK_DETECT' not in s_fsddisk"
         fail_msg: "{{ s_fsddisk }}, Favor de escalar con Infraestructura Linux-INTEL"
-        success_msg: "Dispositivo /dev/{{ s_fsddisk }} detectado, continua proceso de LVM"
+        success_msg: "Dispositivo {{ s_fsddisk }} detectado, continua proceso de LVM"
 #    ------------------ Crrear VG y LV ------------------#
 - block:
+    - name: Obtener discos asociados al {{ vgnombre }}
+      become: true
+      shell: "{{ pvvgdsks }}"
+      register: dskinfo2
+
+    - set_fact:
+        all_pvs: "{{ dskinfo2.stdout_lines + [s_fsddisk] }}"
+
     - name: Extender VolumeGroup {{ vgnombre }}
       become: true
       lvg:
         vg: "{{ vgnombre }}"
-        pvs: "{{ vgexteded }}, /dev/{{ s_fsddisk }}"
+        pvs: "{{ all_pvs }}"
         state: present
 
     - name: Crear LogicaVolume {{ lvnombre }}
