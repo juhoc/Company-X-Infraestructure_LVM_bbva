@@ -12,9 +12,9 @@
     - name: Resultado de la validar antes de crear el LV {{ lvnombre }}
       assert:
         that:
-          - "'NON_FOUND_LVM,MOUNTPOINT' in s_flvfdnm"
-        fail_msg: "El LV y Punto de montura {{ vgnombre }}-{{ lvnombre }},{{ mpnombre }} ya estan creados, indique otros nombres"
-        success_msg: "El LV y Punto de montura {{ vgnombre }}-{{ lvnombre }},{{ mpnombre }} no existen, se continua con las siguites tareas"
+          - "'ITEMS_KO' in s_flvfdnm"
+        fail_msg: "El LV y Punto de montura {{ lvnombre }},{{ mpnombre }} ya estan creados, indique otros nombres"
+        success_msg: "El LV y Punto de montura {{ lvnombre }},{{ mpnombre }} no existen, se continua con las siguites tareas"
 
     - name: Validar si existe {{ vgnombre }}
       become: true
@@ -35,10 +35,10 @@
 
     - set_fact:
         run_playbook: |
-          {% if (s_fvgn == 'NON_FOUND_VGAPPS') and (s_fvgrsz | int < 0) %}
-          ['lvm_add_disk']
-          {% elif (s_fvgn == 'VGAPPS') and (s_fvgrsz | int > 1) %}
+          {% if (s_fvgn == 'VGAPPS') and (s_fvgrsz | int > 1) %}
           ['lvm_local_disk']
+          {% elif (s_fvgn == 'NON_FOUND_VGAPPS') and (s_fvgrsz | int < 0) %}
+          ['lvm_add_disk']
           {% else %}
           ['lvm_ext_vg']
           {% endif %}

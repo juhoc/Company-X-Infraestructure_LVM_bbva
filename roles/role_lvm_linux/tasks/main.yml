@@ -19,6 +19,8 @@
     run_playbook: |
       {% if tarea == 'Crear_VGAPPS' %}
       ['lvm_create_vg']
+      {% elif tarea == 'Crear_LVNAME' %}
+      ['lvm_create_lv']
       {% else %}
       ['No_selecciono_ninguna_tarea']
       {% endif %}
