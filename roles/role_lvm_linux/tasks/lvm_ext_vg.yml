@@ -115,7 +115,6 @@
       lvg:
         vg: "{{ vgnombre }}"
         pvs: "{{ all_pvs }}"
-        state: present
 
     - name: Crear LogicaVolume {{ lvnombre }}
       become: true
