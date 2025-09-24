@@ -12,7 +12,7 @@
     - name: Resultado de la validar antes de crear el LV {{ lvnombre }}
       assert:
         that:
-          - "'NON_FOUND_LVM,MOUNTPOINT' in s_flvfdnm"
+          - "'ITEMS_KO' in s_flvfdnm"
         fail_msg: "El LV y Punto de montura {{ lvnombre }},{{ mpnombre }} ya estan creados, indique otros nombres"
         success_msg: "El LV y Punto de montura {{ lvnombre }},{{ mpnombre }} no existen, se continua con las siguites tareas"
 
