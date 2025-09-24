@@ -82,7 +82,7 @@
 
     - name: Ejecutar scaneo de nuevos dispositivo tipo disco
       become: true
-      shell: "echo {{ scandevices }}"
+      shell: "{{ scandevices }}"
 
     - name: Obtener lista de discos posterior al agregado de disco
       shell: "{{ chknwdsk }} > {{ snapdisks }}/snapdisk_post"
