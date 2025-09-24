@@ -22,7 +22,7 @@
         size: "{{ lvcapacidad }}"
         resize: true
         shrink: false
-      when: "lvcapacidad | init > s_flvftsz"
+      when: "lvcapacidad | int > s_flvftsz"
 
     # - set_fact:
     #     run_playbook: |
