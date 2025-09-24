@@ -16,6 +16,7 @@
         s_flvfspj: "{{ lvinfo2.stdout | default('0') | trim }}"
 
     - name: Extender el {{ lvnombre }} a {{ lvcapacidad }}G
+      become: true
       lvol:
         vg: "{{ vgnombre }}"
         lv: "{{ lvnombre }}"
