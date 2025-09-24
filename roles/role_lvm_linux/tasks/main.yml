@@ -17,8 +17,8 @@
 
 - set_fact:
     run_playbook: |
-      {% if tarea == 'LVM_Total' %}
-      ['lvm_check_vg']
+      {% if tarea == 'Crear_VGAPPS' %}
+      ['lvm_create_vg']
       {% else %}
       ['No_selecciono_ninguna_tarea']
       {% endif %}

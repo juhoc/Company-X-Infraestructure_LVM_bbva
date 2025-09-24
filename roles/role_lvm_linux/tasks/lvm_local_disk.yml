@@ -3,12 +3,12 @@
 - block:
     - name: Valida el tamaño de {{ lvnombre }}
       become: true
-      shell: "echo {{ lvchecksz }}"
+      shell: "{{ lvchecksz }}"
       register: lvinfo2
 
     - name: Valida el porcetaje de uso de {{ lvnombre }}
       become: true
-      shell: "echo {{ lvcheckpj }}"
+      shell: "{{ lvcheckpj }}"
       register: lvinfo3
 
     - set_fact:
