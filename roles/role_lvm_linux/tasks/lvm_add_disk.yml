@@ -2,7 +2,7 @@
 #------------------Obtener lista Disco para VGAPPS------------------#
 - block:
     - name: Obtener lista de discos previa al agregado de disco
-      shell: "{{ chknwdsk }} > {{ varoptasbd }}/snapdisk_prev"
+      shell: "{{ chknwdsk }} > {{ snapdisks }}/snapdisk_prev"
 #------------------Agregar Disco para VGAPPS------------------#
 # - block:
 #     - name: Copiar script para obtener informacion de la VM
@@ -80,7 +80,7 @@
       shell: "{{ scandevices }}"
 
     - name: Obtener lista de discos posterior al agregado de disco
-      shell: "{{ chknwdsk }} > {{ varoptasbd }}/snapdisk_post"
+      shell: "{{ chknwdsk }} > {{ snapdisks }}/snapdisk_post"
 
     - name: Obtener diferencias de discos snapdisk_post vs snapdisk_prev
       shell: "{{ diffdisk }}"

@@ -1,5 +1,6 @@
 #---variables-emcuesta---
-varoptasb: /var/opt/ansible
+#varoptasb: /var/opt/ansible
+snapdisks: /tmp
 homeusrasb: ~/
 lvnombre: "{{ lvn }}"
 lvcapacidad: "{{ lvsz }}"
@@ -15,7 +16,7 @@ lvchecksz: "df -h | tr -s ' %-' , | cut -d, -f2,3,6,7 | grep -w {{ lvnombre }},[
 lvcheckpj: "df -h | tr -s ' %-' , | cut -d, -f2,3,6,7 | grep -w {{ lvnombre }},[0-9]...,[0-9],{{ mpnombre }} | cut -d, -f3"
 scandevices: $(for host in /sys/class/scsi_host/host*; do echo "- - -" | tee $host/scan; done)
 chknwdsk: "lsblk -rn -o NAME,TYPE,SIZE,FSTYPE,MOUNTPOINT | sort | grep disk | tr -s ' ' , | cut -d, -f1,2,3"
-diffdisk: "sdiff {{ varoptasb }}/snapdisk_post {{ varoptasb }}/snapdisk_prev | grep '<'"
+diffdisk: "sdiff {{ snapdisks }}/snapdisk_post {{ snapdisks }}/snapdisk_prev | grep '<'"
 #---variables-objetos-sistema_operativo---
 varoptasbd: /var/opt/ansible/
 varoptasbf: /var/opt/ansible
