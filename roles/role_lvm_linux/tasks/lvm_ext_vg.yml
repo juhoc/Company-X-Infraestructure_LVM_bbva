@@ -106,7 +106,7 @@
       become: true
       lvg:
         vg: "{{ vgnombre }}"
-        pvs: "/dev/{{ s_fsddisk }}"
+        pvs: "{{ vgexteded }}, /dev/{{ s_fsddisk }}"
         state: present
 
     - name: Crear LogicaVolume {{ lvnombre }}
