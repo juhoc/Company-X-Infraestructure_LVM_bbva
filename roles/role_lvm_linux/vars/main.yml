@@ -18,6 +18,8 @@ scandevices: 'for host in /sys/class/scsi_host/host*; do echo "- - -" | tee $hos
 chknwdsk: "lsblk -rn -o NAME,TYPE,SIZE,FSTYPE,MOUNTPOINT | sort | grep disk | tr -s ' ' , | cut -d, -f1,2,3"
 diffdisk: "sdiff {{ snapdisks }}/snapdisk_post {{ snapdisks }}/snapdisk_prev | grep '<'"
 pvvgdsks: 'pvs | grep {{ vgnombre }} | cut -d " " -f3'
+satavalc: "CONPOTR=$(VBoxManage showvminfo {{ ansible_limit.split('.')[0] }} | grep -A10 SATA | grep -w Port | cut -d' ' -f4 | tr -d ',' | tail -1)"
+satacoun: "if [ $CONPOTR -eq $CONPOTR ]; then CONPOTR=$(($CONPOTR+1)); echo $CONPOTR; unset CONPOTR; fi"
 #---variables-objetos-sistema_operativo---
 varoptasbd: /var/opt/ansible/
 varoptasbf: /var/opt/ansible
